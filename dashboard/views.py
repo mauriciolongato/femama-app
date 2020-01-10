@@ -3,7 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 
 import json
-from .tasks import data_forms_load, score_load
+from .tasks import data_forms_load, score_load, dropdown_metabase_load
+from .models import jobs
 
 
 @csrf_exempt
@@ -25,6 +26,7 @@ def dashboard_frame(requests):
 def mapa_br(requests):
     with open('dashboard/static/json/uf.json', encoding='latin-1') as json_file:
         json_data = json.load(json_file)
+
     return JsonResponse(json_data, safe=False)
 
 
@@ -42,3 +44,11 @@ def update_dados_score(requests):
     score_load.delay()
 
     return JsonResponse({'status': 'ok'}, safe=False)
+
+
+@csrf_exempt
+def update_dropdown_metabase(requests):
+
+    status = dropdown_metabase_load.delay()
+
+    return HttpResponse(status)

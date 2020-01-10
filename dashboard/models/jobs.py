@@ -9,7 +9,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -93,10 +92,9 @@ def clean_db_data():
 
 
 def load_questions(questions):
-
     for num_pergunta in range(len(questions)):
         p, created = objects.QuestionarioCenso.objects.update_or_create(
-            numero_pergunta=num_pergunta+1,
+            numero_pergunta=num_pergunta + 1,
             defaults={'pergunta': questions[num_pergunta]},
         )
 
@@ -129,7 +127,6 @@ def load_answers(answers):
         print(datetime.now(), ' - ', nome_ong)
         # Perguntas e respostas
         for num_pergunta, resposta in zip(range(len(questions)), respostas):
-
             p = objects.QuestionarioCenso.objects.get(numero_pergunta=num_pergunta + 1)
 
             objects.CensoRespostas.objects.update_or_create(
@@ -142,11 +139,9 @@ def load_answers(answers):
 
 
 def load_score(score):
-
     objects.ScoreRespostas.objects.all().delete()
 
     for pergunta in score[1:]:
-
         p = objects.QuestionarioCenso.objects.get(numero_pergunta=int(pergunta[0]))
         print(datetime.now())
         print(int(pergunta[0]), pergunta, p)
@@ -160,12 +155,132 @@ def load_score(score):
             advocacy=pergunta[5],
             proximidade_femama=pergunta[6],
             maturidade_data=pergunta[7],
-            )
+        )
+
+
+def load_dropdowns_metabase():
+    objects.TipoCancer.objects.all().delete()
+    l1 = objects.TipoCancer.objects.create(tipo_cancer="Outros")
+    l2 = objects.TipoCancer.objects.create(tipo_cancer="Mama")
+    l1.save()
+    l2.save()
+
+    objects.EstagioCancer.objects.all().delete()
+    l1 = objects.EstagioCancer.objects.create(estagio_cancer="Local / inicial")
+    l2 = objects.EstagioCancer.objects.create(estagio_cancer="Metastáico")
+    l1.save()
+    l2.save()
+
+    objects.SistemaSaude.objects.all().delete()
+    l1 = objects.SistemaSaude.objects.create(tipo_sistema="Sistema Público (SUS)")
+    l2 = objects.SistemaSaude.objects.create(tipo_sistema="Sistema Privado (Planos e Convênios)")
+    l1.save()
+    l2.save()
+
+    objects.FaixaEtaria.objects.all().delete()
+    l1 = objects.FaixaEtaria.objects.create(classe_faixa="Menos de 50 anos")
+    l2 = objects.FaixaEtaria.objects.create(classe_faixa="Mais de 50 anos")
+    l1.save()
+    l2.save()
+
+    objects.MapeamentoPaciente.objects.all().delete()
+    l1 = ["Não realizamos cadastro",
+          "Nome do paciente",
+          "Endereço do paciente",
+          "Email do paciente",
+          "Telefone do paciente",
+          "Sistema de saúde que utiliza (sus/particular)",
+          "Tipo de câncer (mama ou outras neoplastias)",
+          "Subtipo do câncer de mama (her2 +, triplo negativo, etc.)",
+          "Câncer hereditário (presença de mutação em genes como BRCA ou outros)",
+          "Estágio no momento do diagnóstico",
+          "Estágio no momento que chegou à ONG",
+          "Tempo de espera de diagnóstico",
+          "Tempo de espera para início de tratamento",
+          "Dificuldades de acesso relatadas pelo paciente (reconstrução mamária negada, falta de medicamento, etc)"
+          ]
+    objects.MapeamentoPaciente.objects.bulk_create([objects.MapeamentoPaciente(informacao=x) for x in l1])
+
+    objects.ContatoPaciente.objects.all().delete()
+    l1 = ["Não guardamos informações",
+          "Fazemos cadastro de papel",
+          "Fazemos cadastro digital (word, formulário, excel)",
+          "Possuímos um sistema digital (plataforma, aplicativo ou ferramenta) próprio para isso",
+          "Incluímos o paciente num mailling/grupo de e-mail",
+          "Incluímos o paciente em um grupo do whatsapp"
+          ]
+
+    objects.ContatoPaciente.objects.bulk_create([objects.ContatoPaciente(informacao=x) for x in l1])
+
+    objects.Divulgacao.objects.all().delete()
+    l1 = ["Divulga nas redes sociais",
+          "Publica notícia no site ou blog da instituição",
+          "Contata a imprensa local",
+          "Envia e-mail para listas de contatos",
+          "Envia fotos e informações pelo WhatsApp para seus contatos",
+          "Relata para funcionários / voluntários em reunião presencial",
+          "Coloca avisos em murais"
+          ]
+    objects.Divulgacao.objects.bulk_create([objects.Divulgacao(tipo_divulgacao=x) for x in l1])
+
+    objects.CanalDigital.objects.all().delete()
+    l1 = ["Facebook",
+          "Instagram",
+          "Site",
+          "Youtube",
+          "Linkedin",
+          "Twitter"
+          ]
+    objects.CanalDigital.objects.bulk_create([objects.CanalDigital(canal=x) for x in l1])
+
+    objects.Fornecedor.objects.all().delete()
+    l1 = ["Assessoria/assessor de imprensa",
+          "Agência/profissional de propaganda",
+          "Agência/profissional de comunicação/marketing digital",
+          "Agência/profissional de design",
+          "Não temos fornecedores contratados"
+          ]
+    objects.Fornecedor.objects.bulk_create([objects.Fornecedor(tipo_fornecedor=x) for x in l1])
+
+    objects.Parceria.objects.all().delete()
+    l1 = ["Farmacêuticas",
+          "Universidades",
+          "Clínicas e hospitais públicos",
+          "Clínicas e hospitais privados",
+          "Comércio local",
+          "Marcas / empresas de produtos e serviços",
+          "Prefeitura, secretaria de saúde ou outros órgãos públicos",
+          "Legislativo",
+          "Imprensa local",
+          "Influenciadores digitais",
+          "FEMAMA",
+          "Outras ONGs (sem contar a FEMAMA)"
+          ]
+    objects.Parceria.objects.bulk_create([objects.Parceria(tipo_parceiro=x) for x in l1])
+
+    objects.TipoParceria.objects.all().delete()
+    l1 = ["Apoio financeiro",
+          "Apoio de capacitação",
+          "Apoio de prestação de serviço",
+          "Apoio de divulgação",
+          "Apoio em advocacy",
+          "Não tenho"
+          ]
+    objects.TipoParceria.objects.bulk_create([objects.TipoParceria(tipo_parceria=x) for x in l1])
+
+    objects.QuantidadeVoluntarios.objects.all().delete()
+    l1 = ["0",
+          "de 1 - 10",
+          "de 11 a 20",
+          "de 21 a 30",
+          "51 a 100",
+          "100+"
+          ]
+    objects.QuantidadeVoluntarios.objects.bulk_create([objects.QuantidadeVoluntarios(quantidade=x) for x in l1])
 
 
 # Calculation
 def calculate_score(ong_id):
-
     # ong = objects.Ong.objects.get(ong_id=ong_id)
     p = objects.ScoreRespostas.objects.all()
     answers = objects.CensoRespostas.objects.select_related('ong', 'pergunta')
