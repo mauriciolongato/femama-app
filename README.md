@@ -6,7 +6,7 @@ Simple django, docker and celery project written for learning purpouses
 
 Clone repository
 
-    git clone https://github.com/mauriciolongato/tutorial-docker-django-celery.git
+    git clone https://github.com/mauriciolongato/femama-app.git
 
 Run docker-compose
     
