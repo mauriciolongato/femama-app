@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_reorder',
     'base',
     'dashboard',
 ]
@@ -49,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -70,7 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'base.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -104,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -118,10 +116,37 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
 CELERY_BROKER_URL = 'amqp://rabbitmq:5672'
+
+# https://github.com/mishbahr/django-modeladmin-reorder
+ADMIN_REORDER = (
+    # CENSO
+    {'app': 'dashboard', 'label': 'CENSO',
+     'models': ('dashboard.Ong',
+                'dashboard.QuestionarioCenso',
+                'dashboard.CensoRespostas')
+     },
+    # SCORE
+    {'app': 'dashboard', 'label': 'SCORE',
+     'models': ('dashboard.ScoreRespostas',)
+     },
+    # SCORE
+    {'app': 'dashboard', 'label': 'DROPDOWNS METABASE',
+     'models': ('dashboard.Divulgacao',
+                'dashboard.CanalDigital',
+                'dashboard.Fornecedor',
+                'dashboard.Parceria',
+                'dashboard.TipoParceria',
+                'dashboard.QuantidadeVoluntarios',
+                'dashboard.TipoCancer',
+                'dashboard.EstagioCancer',
+                'dashboard.SistemaSaude',
+                'dashboard.FaixaEtaria',
+                'dashboard.MapeamentoPaciente',
+                'dashboard.ContatoPaciente',)
+     },)

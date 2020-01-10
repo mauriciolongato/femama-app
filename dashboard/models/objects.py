@@ -132,11 +132,3 @@ class MapeamentoPaciente(models.Model):
 # num_pergunta 156 ('Quais informações A ONG mapeia no cadastro de paciente?')
 class ContatoPaciente(models.Model):
     informacao = models.CharField(max_length=500, null=True)
-
-
-# # DASH CENSO
-# class SumarioPergunta(models.Model):
-#     max_questao_id = models.IntegerField(null=True)
-#     secao = models.CharField(max_length=500, null=True)
-#     pergunta_text = models.CharField(max_length=500, null=True)
-#     pergunta_sumario_text = models.CharField(max_length=500, null=True)
