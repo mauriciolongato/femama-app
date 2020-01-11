@@ -1,6 +1,10 @@
 from django.db import models
 
 
+# USUARIOS FEMAMA
+
+
+
 # ONGS
 class Ong(models.Model):
     nome = models.CharField(max_length=500)

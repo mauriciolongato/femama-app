@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 
 import json
 from .tasks import data_forms_load, score_load, dropdown_metabase_load
-from .models import jobs
 
 
-@csrf_exempt
+@login_required
 def dashboard_frame(requests):
     # METABASE_SITE_URL = "http://134.209.10.236:3000"
     # METABASE_SECRET_KEY = "7331ac790842a4e87e3dbd7dac5ee69da446597ad105519ae78fa739567276ad"
@@ -52,3 +54,18 @@ def update_dropdown_metabase(requests):
     status = dropdown_metabase_load.delay()
 
     return HttpResponse(status)
+
+
+@csrf_exempt
+def user_login(requests):
+    if requests.method == 'POST':
+        form = AuthenticationForm(data=requests.POST)
+        if form.is_valid():
+            # Log in the user
+            user = form.get_user()
+            login(requests, user)
+            if 'next' in requests.POST:
+                return redirect('url_dashboard')
+    else:
+        form = AuthenticationForm()
+    return render(requests, 'login.html', {'form': form})

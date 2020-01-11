@@ -56,7 +56,7 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,8 +125,12 @@ CELERY_BROKER_URL = 'amqp://rabbitmq:5672'
 
 # https://github.com/mishbahr/django-modeladmin-reorder
 ADMIN_REORDER = (
+    # ACESSOS USUARIO
+    {'app': 'auth', 'label': 'LOGINS DASHBOARD FEMAMA',
+     'models': ('auth.User', 'auth.Group')
+     },
     # CENSO
-    {'app': 'dashboard', 'label': 'CENSO',
+    {'app': 'dashboard', 'label': 'CENSO - PERGUNTAS E RESPOSTAS',
      'models': ('dashboard.Ong',
                 'dashboard.QuestionarioCenso',
                 'dashboard.CensoRespostas')
@@ -150,3 +154,7 @@ ADMIN_REORDER = (
                 'dashboard.MapeamentoPaciente',
                 'dashboard.ContatoPaciente',)
      },)
+
+LOGIN_REDIRECT_URL = '/dashboard/info/'
+
+LOGOUT_REDIRECT_URL = '/dashboard/account/login/'
