@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,26 +11,27 @@
 
 <div class="sidenav">
     <img src="{% static 'img/femama_logo.png' %}" alt="Femama">
-    <a href="#encontre" id="encontre">Encontre</a>
-    <a href="#perfis" id="perfis">Perfis</a>
-    <a href="#comunicacao" id="comunicacao">Comunicação</a>
-    <a href="#pacientes" id="pacientes">Pacientes</a>
-    <a href="#radar" id="radar">Radar</a>
-    <a href="#censo" id="censo">Censo</a>
-    <a href="#ong" id="ong">ONG</a>
+    <a href="/info/comunicação/" id="comunicação">Comunicação</a>
+    <a href="/info/pacientes_atendidos/" id="pacientes_atendidos">Pacientes Atendidos</a>
+    <a href="/info/radar/" id="radar">Radar</a>
+    <a href="/info/radar_cidades/" id="radar_cidades">Radar - Cidades</a>
+    <a href="/info/encontre_no_censo/" id="encontre_no_censo">Encontre no censo</a>
+    <a href="/info/perfil_das_ongs/" id="perfil_das_ongs">Perfil das ongs</a>
+    <a href="/accounts/logout/">Sair</a>
 </div>
 
 <div class="main">
+<!--    <h3>Comunicação</h3>-->
     <iframe
         src="{{iframeUrl}}"
         frameborder="0"
-        width="1000"
+        width="1300"
         height="800"
         allowtransparency
     ></iframe>
 </div>
 </body>
-<script>
-    document.;
-</script>
+<!--<script>-->
+<!--    document.;-->
+<!--</script>-->
 </html>

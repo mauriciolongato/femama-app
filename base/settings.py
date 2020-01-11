@@ -155,6 +155,6 @@ ADMIN_REORDER = (
                 'dashboard.ContatoPaciente',)
      },)
 
-LOGIN_REDIRECT_URL = '/dashboard/info/'
+LOGIN_REDIRECT_URL = '/info/'
 
-LOGOUT_REDIRECT_URL = '/dashboard/account/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

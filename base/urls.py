@@ -21,5 +21,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dashboard/', include('dashboard.urls'), name='url_dashboard'),
+    path('', include('dashboard.urls'), name='url_dashboard'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
