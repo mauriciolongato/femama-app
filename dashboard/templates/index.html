@@ -11,13 +11,26 @@
 
 <div class="sidenav">
     <img src="{% static 'img/femama_logo.png' %}" alt="Femama">
-    <a href="/info/comunicação/" id="comunicação">Comunicação</a>
-    <a href="/info/pacientes_atendidos/" id="pacientes_atendidos">Pacientes Atendidos</a>
-    <a href="/info/radar/" id="radar">Radar</a>
-    <a href="/info/radar_cidades/" id="radar_cidades">Radar - Cidades</a>
-    <a href="/info/encontre_no_censo/" id="encontre_no_censo">Encontre no censo</a>
-    <a href="/info/perfil_das_ongs/" id="perfil_das_ongs">Perfil das ongs</a>
-    <a href="/accounts/logout/">Sair</a>
+    <h5><a>DASHBOARDS</a></h5>
+    <ul class="list-group" style="list-style-type:none;">
+        <li><a href="/info/comunicação/" id="comunicação">Comunicação</a></li>
+        <li><a href="/info/pacientes_atendidos/" id="pacientes_atendidos">Pacientes Atendidos</a></li>
+        <li><a href="/info/radar/" id="radar">Radar</a></li>
+        <li><a href="/info/radar_cidades/" id="radar_cidades">Radar - Cidades</a></li>
+        <li><a href="/info/encontre_no_censo/" id="encontre_no_censo">Encontre no censo</a></li>
+        <li><a href="/info/perfil_das_ongs/" id="perfil_das_ongs">Perfil das ongs</a></li>
+    </ul>
+
+<!--    <h5><i class="glyphicon glyphicon-signal"></i><a>CARGA DADOS</a></h5>-->
+<!--    <ul class="list-group" style="list-style-type:none;">-->
+<!--        <li><a href="/update_dados_censo/" id="censo">Censo</a></li>-->
+<!--        <li><a href="/update_dados_score/" id="score">Score</a></li>-->
+<!--        <li><a href="/update_dropdowns/" id="tabelas_auxiliares">Tabelas auxiliares</a></li>-->
+<!--    </ul>-->
+    <h5><a>USUÁRIO</a></h5>
+    <ul class="list-group logout" style="list-style-type:none;">
+        <li><a href="/accounts/logout/">Logout</a></li>
+    </ul>
 </div>
 
 <div class="main">
@@ -25,8 +38,8 @@
     <iframe
         src="{{iframeUrl}}"
         frameborder="0"
-        width="1300"
-        height="800"
+        width="1050"
+        height="630"
         allowtransparency
     ></iframe>
 </div>
