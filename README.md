@@ -18,6 +18,6 @@ Grant permission to postgres-data directory
     
 Set django - makemigrations, migrate and admin
     
-    docker-compose run web python manage.py makemigrations
-    docker-compose run web python manage.py migrate
-    docker-compose run web python manage.py createsuperuser
+    docker-compose exec web python manage.py makemigrations
+    docker-compose exec web python manage.py migrate
+    docker-compose exec web python manage.py createsuperuser
