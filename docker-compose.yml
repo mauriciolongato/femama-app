@@ -15,14 +15,14 @@ services:
        - "5432:5432"
 
   web:
-    build: .
+    build: ./app
     environment:
       - HOSTNAMERABBIT=rabbitmq
     restart: on-failure
     command: >
-      sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/code
+      - ./app:/code
     ports:
       - "8000:8000"
     depends_on:
@@ -47,8 +47,9 @@ services:
       retries: 5
 
   worker:
-    build: .
-    command: celery -A base.celery worker --loglevel=info
+    build: ./app
+    command: >
+      sh -c "celery -A base.celery worker --loglevel=info"
     ports: []
     depends_on:
       - rabbitmq
