@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./.postgres-data/pgdata:/var/lib/postgresql/data/pgdata
+    ports:
+       - "5432:5432"
+
+  web:
+    build: ./app
+    restart: on-failure
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./app:/code
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - rabbitmq
+    links:
+      - rabbitmq
+
+  rabbitmq: # login guest:guest
+    image: rabbitmq:management
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  worker:
+    build: ./app
+    command: >
+      sh -c "celery -A base.celery worker --loglevel=info"
+    ports: []
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - rabbitmq
+      - db
+      - web
