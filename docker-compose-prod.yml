@@ -63,7 +63,6 @@ services:
 
   nginx:
     build: ./nginx
-    restart: on-failure
     volumes:
       - ./.static-volume:/home/app/web/staticfiles
     ports:
