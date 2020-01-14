@@ -29,6 +29,7 @@ Acesse: http://127.0.0.1:8000/admin
 ### Setup do ambiente de produção
 
 Antes da descrição do processo de deploy, esse site foi muito útil! (valeu a referencia)
+
 https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
 
 Clone o repositório
