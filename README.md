@@ -42,13 +42,8 @@ Rode o docker-compose-prod
     docker-compose -f docker-compose-prod.yml build
     docker-compose -f docker-compose-prod.yml up
 
-De permissão para o diretório .postgres-data e .static-volume 
-
-    sudo chown -R 101 ./
-    
 Setup do django - makemigrations, migrate and admin
     
-    docker-compose -f docker-compose-prod.yml exec web python manage.py collectstatic --no-input --clear
     docker-compose -f docker-compose-prod.yml exec web python manage.py makemigrations
     docker-compose -f docker-compose-prod.yml exec web python manage.py migrate
     docker-compose -f docker-compose-prod.yml exec web python manage.py createsuperuser
