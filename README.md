@@ -10,6 +10,7 @@ Clone o repositório
 
 Rode o docker-compose-dev
     
+    docker-compose -f docker-compose-dev.yml build
     docker-compose -f docker-compose-dev.yml up
 
 De permissão para o diretório .postgres-data e .static-volume 
@@ -38,6 +39,7 @@ Clone o repositório
 
 Rode o docker-compose-prod
     
+    docker-compose -f docker-compose-prod.yml build
     docker-compose -f docker-compose-prod.yml up
 
 De permissão para o diretório .postgres-data e .static-volume 
