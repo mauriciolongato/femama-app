@@ -23,8 +23,12 @@ def data_forms_load():
 def score_load():
 
     logger.info('starting request google sheets')
+
     score = jobs.get_score_data()
     jobs.load_score(score)
+
+    perfil = jobs.get_perfil_data()
+    jobs.load_regra_perfil(perfil)
 
     return {'status': 'Score carregado'}
 

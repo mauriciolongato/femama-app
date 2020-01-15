@@ -139,7 +139,8 @@ ADMIN_REORDER = (
      },
     # SCORE
     {'app': 'dashboard', 'label': 'SCORE',
-     'models': ('dashboard.ScoreRespostas',)
+     'models': ('dashboard.ScoreRespostas',
+                'dashboard.RegraPerfil',)
      },
     # DROPDOWNS METABASE
     {'app': 'dashboard', 'label': 'DROPDOWNS METABASE',
@@ -157,6 +158,7 @@ ADMIN_REORDER = (
                 'dashboard.ContatoPaciente',
                 'dashboard.Coalizao',)
      },)
+
 
 LOGIN_REDIRECT_URL = '/info/'
 

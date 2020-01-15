@@ -9,6 +9,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -77,6 +78,19 @@ def get_score_data():
     # The ID and range of a sample spreadsheet.
     SAMPLE_SPREADSHEET_ID = '1BGjuMFYUAFqUlgkQcyhFnyzlBi62G-ckeSHj0JfaypQ'
     SAMPLE_RANGE_NAME = 'pesos!A:H'
+
+    data = get_sheets_data(SAMPLE_SPREADSHEET_ID, SAMPLE_RANGE_NAME, SCOPES)
+    return data
+
+
+def get_perfil_data():
+    # If modifying these scopes, delete the file token.pickle.
+    # https://docs.google.com/spreadsheets/d/1BGjuMFYUAFqUlgkQcyhFnyzlBi62G-ckeSHj0JfaypQ/edit#gid=0
+    SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+
+    # The ID and range of a sample spreadsheet.
+    SAMPLE_SPREADSHEET_ID = '1BGjuMFYUAFqUlgkQcyhFnyzlBi62G-ckeSHj0JfaypQ'
+    SAMPLE_RANGE_NAME = 'perfil!A:D'
 
     data = get_sheets_data(SAMPLE_SPREADSHEET_ID, SAMPLE_RANGE_NAME, SCOPES)
     return data
@@ -155,6 +169,19 @@ def load_score(score):
             advocacy=pergunta[5],
             proximidade_femama=pergunta[6],
             maturidade_data=pergunta[7],
+        )
+
+
+def load_regra_perfil(l_perfil):
+    objects.RegraPerfil.objects.all().delete()
+
+    for grupo in l_perfil[1:]:
+
+        objects.RegraPerfil.objects.create(
+            nome_perfil=grupo[0],
+            atuacao_advocacy=grupo[1],
+            relacao_femama=grupo[2],
+            potencial_advocacy_dados=grupo[3],
         )
 
 

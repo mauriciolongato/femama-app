@@ -8,6 +8,7 @@ app_name = 'dashboard'
 
 
 urlpatterns = [
+    path('', dashboard_frame, name='dash'),
     path('info/', dashboard_frame, name='dash'),
     path('info/<str:dashname>/', dashboard_frame),
     path('update_dados_censo/', update_dados_form),
