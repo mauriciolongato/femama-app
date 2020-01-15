@@ -278,6 +278,26 @@ def load_dropdowns_metabase():
           ]
     objects.QuantidadeVoluntarios.objects.bulk_create([objects.QuantidadeVoluntarios(quantidade=x) for x in l1])
 
+    objects.Coalizao.objects.all().delete()
+    l1 = ["Abc Alliance",
+          "Alianza Latina",
+          "Brazil Foundation",
+          "Coniacc",
+          "Conselho Estadual Da Condição Feminina De São Paulo (Cecf)",
+          "Fórum De Patologias Crônicas Da Bahia",
+          "Frente Estadual De Combate Ao Câncer De Mama Do Rj",
+          "Movimento Todos Juntos Contra O Câncer",
+          "Não",
+          "Projeto City Cancer Challenge",
+          "Recan",
+          "Recomeçar",
+          "Rede Feminina De Combate Ao Câncer",
+          "Rede Mama Ceará",
+          "Uicc",
+          "Ulaccam"
+          ]
+    objects.Coalizao.objects.bulk_create([objects.Coalizao(coalizao=x) for x in l1])
+
 
 # Calculation
 def calculate_score(ong_id):

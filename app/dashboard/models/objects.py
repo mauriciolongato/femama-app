@@ -132,3 +132,9 @@ class MapeamentoPaciente(models.Model):
 # num_pergunta 156 ('Quais informações A ONG mapeia no cadastro de paciente?')
 class ContatoPaciente(models.Model):
     informacao = models.CharField(max_length=500, null=True)
+
+
+# Pergunta rods
+# num_pergunta 156 ('Quais informações A ONG mapeia no cadastro de paciente?')
+class Coalizao(models.Model):
+    coalizao = models.CharField(max_length=500, null=True)

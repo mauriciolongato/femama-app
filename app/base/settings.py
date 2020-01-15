@@ -131,7 +131,7 @@ ADMIN_REORDER = (
     {'app': 'auth', 'label': 'LOGINS DASHBOARD FEMAMA',
      'models': ('auth.User', 'auth.Group')
      },
-    # CENSO
+    # CENSO - PERGUNTAS E RESPOSTAS
     {'app': 'dashboard', 'label': 'CENSO - PERGUNTAS E RESPOSTAS',
      'models': ('dashboard.Ong',
                 'dashboard.QuestionarioCenso',
@@ -141,7 +141,7 @@ ADMIN_REORDER = (
     {'app': 'dashboard', 'label': 'SCORE',
      'models': ('dashboard.ScoreRespostas',)
      },
-    # SCORE
+    # DROPDOWNS METABASE
     {'app': 'dashboard', 'label': 'DROPDOWNS METABASE',
      'models': ('dashboard.Divulgacao',
                 'dashboard.CanalDigital',
@@ -154,7 +154,8 @@ ADMIN_REORDER = (
                 'dashboard.SistemaSaude',
                 'dashboard.FaixaEtaria',
                 'dashboard.MapeamentoPaciente',
-                'dashboard.ContatoPaciente',)
+                'dashboard.ContatoPaciente',
+                'dashboard.Coalizao',)
      },)
 
 LOGIN_REDIRECT_URL = '/info/'
