@@ -123,6 +123,10 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 CELERY_BROKER_URL = 'amqp://rabbitmq:5672'
 
 # https://github.com/mishbahr/django-modeladmin-reorder
@@ -156,7 +160,8 @@ ADMIN_REORDER = (
                 'dashboard.FaixaEtaria',
                 'dashboard.MapeamentoPaciente',
                 'dashboard.ContatoPaciente',
-                'dashboard.Coalizao',)
+                'dashboard.Coalizao',
+                'dashboard.ImagensDash',)
      },)
 
 

@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models.objects import Ong, QuestionarioCenso, CensoRespostas, ScoreRespostas, SegmentoOng, \
     Divulgacao, CanalDigital, Fornecedor, Parceria, \
     TipoCancer, EstagioCancer, SistemaSaude, FaixaEtaria, MapeamentoPaciente, ContatoPaciente, TipoParceria,\
-    QuantidadeVoluntarios, Coalizao, RegraPerfil
+    QuantidadeVoluntarios, Coalizao, RegraPerfil, ImagensDash
 
 
 # Cliente
@@ -123,6 +123,12 @@ class RegraPerfilAdmin(admin.ModelAdmin):
     list_per_page = 15
 
 
+class ImagensDashAdmin(admin.ModelAdmin):
+    list_display = [f.name for f in ImagensDash._meta.get_fields() if f.editable and not f.many_to_many]
+    search_fields = [f.name for f in ImagensDash._meta.get_fields() if f.editable and not f.many_to_many]
+    list_per_page = 15
+
+
 admin.site.register(Ong, OngAdmin)
 admin.site.register(CensoRespostas, CensoRespostasAdmin)
 admin.site.register(QuestionarioCenso, QuestionarioCensoAdmin)
@@ -142,3 +148,4 @@ admin.site.register(TipoParceria, TipoParceriaAdmin)
 admin.site.register(QuantidadeVoluntarios, QuantidadeVoluntariosAdmin)
 admin.site.register(Coalizao, CoalizaoAdmin)
 admin.site.register(RegraPerfil, RegraPerfilAdmin)
+admin.site.register(ImagensDash, ImagensDashAdmin)

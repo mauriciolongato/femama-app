@@ -190,3 +190,8 @@ class Coalizao(models.Model):
 
     class Meta:
         verbose_name_plural = 'Coalizões'
+
+
+# Upload imagens
+class ImagensDash(models.Model):
+    img = models.ImageField(upload_to='img/')
