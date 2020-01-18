@@ -1,5 +1,6 @@
 body {
   font-family: "Lato", sans-serif;
+  margin: 0px;
 }
 
 
@@ -15,6 +16,10 @@ body {
   border: #ff91c0!important;
   border-radius: 0 7px 7px 0;
   overflow-x: hidden;
+}
+
+html, body, .main, .main iframe {
+  height: 100%;
 }
 
 .sidenav h5 a {
