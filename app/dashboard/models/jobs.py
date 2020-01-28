@@ -194,7 +194,7 @@ def load_dropdowns_metabase():
 
     objects.EstagioCancer.objects.all().delete()
     l1 = objects.EstagioCancer.objects.create(estagio_cancer="Local / inicial")
-    l2 = objects.EstagioCancer.objects.create(estagio_cancer="Metastáico")
+    l2 = objects.EstagioCancer.objects.create(estagio_cancer="Metastático")
     l1.save()
     l2.save()
 
