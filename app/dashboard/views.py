@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
+import os
 
 import json
 from .tasks import data_forms_load, score_load, dropdown_metabase_load
@@ -14,8 +15,8 @@ import time
 @login_required
 def dashboard_frame(request, dashname=None):
 
-    METABASE_SITE_URL = "https://femama-dash.herokuapp.com"
-    METABASE_SECRET_KEY = "bd2bbe68ba300861be298086ca2b200686cc5f4c73fc078befa9c7f8c9dd660b"
+    METABASE_SITE_URL = os.environ.get('METABASE_SITE_URL')
+    METABASE_SECRET_KEY = os.environ.get('METABASE_SECRET_KEY')
     payload = {"resource": {"dashboard": 4}, "params": {}, "exp": round(time.time()) + (60 * 10)}
 
     if dashname:
